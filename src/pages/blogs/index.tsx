@@ -1,7 +1,16 @@
-const Blogs = () => {
-    return(
-        <div>Blogs</div>
-    )
-}
+import { PostContainer } from "@/components/fragments";
+import MainLayout from "@/layouts/mainLayout";
 
-export default Blogs
+const Blogs = () => {
+  return (
+    <main className="overflow-hidden">
+      <MainLayout>
+        <section className="mt-28">
+        <PostContainer />
+        </section>
+      </MainLayout>
+    </main>
+  );
+};
+
+export default Blogs;

@@ -1,5 +1,4 @@
-import Footer from "@/components/elements/headerAndFooter/footer";
-import Header from "@/components/elements/headerAndFooter/header";
+import { Footer, Header } from "@/components/elements";
 import { ReactNode } from "react";
 
 const MainLayout: React.FC<{ children: ReactNode }> = ({ children }) => {

@@ -13,11 +13,11 @@ const ActionButton: React.FC<
     if (!btnBorder) {
       switch (variant) {
         case "violet":
-          return "bg-violet-700";
+          return "bg-violet-700 hover:bg-violet-500";
         case "grey":
-          return "bg-gray-400";
+          return "bg-gray-400 hover:bg-gray-300";
         case "blue":
-          return "bg-blue-500";
+          return "bg-blue-500 hover:bg-blue-400";
         default:
           return "bg-transparent"; 
       }
@@ -40,7 +40,7 @@ const ActionButton: React.FC<
       {...props}
       className={`${parseButtonVariant(
         variant
-      )} ${className} w-full p-4 rounded-md`}
+      )} ${className} w-full p-4 rounded-2xl `}
     >
       {children}
     </button>
