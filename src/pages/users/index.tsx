@@ -1,15 +1,71 @@
-import { ActionButton, Pagination, SearchInput, UserTwoBox } from "@/components/elements";
+import {
+  ActionButton,
+  Pagination,
+  SearchInput,
+  UserTwoBox,
+} from "@/components/elements";
 import UserCreateContainer from "@/components/fragments/containers/createUserContainer";
 import MainLayout from "@/layouts/mainLayout";
-import { HtmlHTMLAttributes, useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { User } from "@/types/User";
+
 const Users = () => {
   const [search, setSearch] = useState<string>("");
-  console.log(search, "values");
+  const [act, setAct] = useState<boolean>(false);
+  const [dataUsers, setDataUsers] = useState<User[]>([]);
+  const [userFilter, setUserFilter] = useState<User[]>([]);
+  const [pageAct, setPageAct] = useState<{ page: number; per_page: number }>({
+    page: 1,
+    per_page: 9,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `/api/users/get?page=${pageAct.page}&per_page=${pageAct.per_page}`
+        );
+        setDataUsers(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [pageAct]);
+
+  const handleBtnAct = () => {
+    setAct(!act);
+  };
+
+  const btnPageHendler = (idx: number) => {
+    setPageAct((prev) => ({ ...prev, page: idx + 1 }));
+  };
+
+  const btnPageNextHendler = () => {
+    setPageAct((prev) => ({
+      ...prev,
+      page: prev.page < Math.ceil(dataUsers.length / prev.per_page) ? prev.page + 1 : prev.page,
+    }));
+  };
+
+  const btnPageReturnHendler = () => {
+    setPageAct((prev) => ({
+      ...prev,
+      page: prev.page === 1 ? 1 : prev.page - 1,
+    }));
+  };
+
+  useEffect(() => {
+    const filteredUsers = dataUsers.filter((prev) => prev.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+    setUserFilter(filteredUsers);
+  }, [search, dataUsers]);
+
   return (
     <main className="overflow-hidden">
       <MainLayout>
         <section className="mx-16 mt-28">
-          <h2 className=" text-4xl font-semibold">Users</h2>
+          <h2 className="text-4xl font-semibold">Users</h2>
           <div className="flex items-center justify-between mt-7">
             <SearchInput
               onChange={setSearch}
@@ -19,21 +75,27 @@ const Users = () => {
             <ActionButton
               variant="violet"
               className="text-xl text-white w-52 font-semibold"
+              onClick={handleBtnAct}
             >
               Create User
             </ActionButton>
           </div>
           <div className="grid grid-rows-3 grid-cols-3 gap-10 mt-10">
-            {Array.from({length : 10}).map((_item, idx) => 
-            <UserTwoBox key={idx}/>
-            )
-            }
+            {(userFilter.length === 0 ? dataUsers : userFilter).map((item, idx) => (
+              <UserTwoBox key={idx} data={item} />
+            ))}
           </div>
           <div className="mt-10 mb-16">
-          <Pagination dataLength={10} numAct={1}/>
+            <Pagination
+              clickHendler={btnPageHendler}
+              nextHendler={btnPageNextHendler}
+              returnHendler={btnPageReturnHendler}
+              dataLength={dataUsers.length}
+              numAct={pageAct.page - 1}
+            />
           </div>
         </section>
-        <UserCreateContainer/>
+        {act && <UserCreateContainer btnHendle={handleBtnAct} />}
       </MainLayout>
     </main>
   );

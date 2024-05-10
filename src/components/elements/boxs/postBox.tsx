@@ -1,12 +1,10 @@
 import ActionButton from "../buttons/actionButton";
 
 const PostBox: React.FC<{
-  name: String;
   post: String;
-}> = ({ name, post }) => {
+}> = ({ post }) => {
   return (
     <main className="bg-sky-50 py-5 flex flex-col justify-center px-3 rounded-xl">
-      <p>{name}</p>
       <h3 className="text-3xl font-semibold text-slate-900">{post}</h3>
       <ActionButton
         variant="violet"

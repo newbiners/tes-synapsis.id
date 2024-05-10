@@ -40,7 +40,7 @@ const ActionButton: React.FC<
       {...props}
       className={`${parseButtonVariant(
         variant
-      )} ${className} w-full p-4 rounded-2xl `}
+      )}  p-4 rounded-2xl ${className}`}
     >
       {children}
     </button>

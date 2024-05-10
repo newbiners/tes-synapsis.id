@@ -1,9 +1,11 @@
 import { FaArrowLeft, FaArrowRight, FaDumbbell } from "react-icons/fa";
-import { useState } from "react";
 const Pagination: React.FC<{
-    numAct: number;
-    dataLength: number
-}> = ({numAct, dataLength}) => {
+  numAct: number;
+  dataLength: number;
+  nextHendler: () => void;
+  returnHendler: () => void;
+  clickHendler: (idx: number) => void;
+}> = ({ numAct, dataLength, nextHendler, returnHendler, clickHendler }) => {
   const styleBtn = (idx: number) => {
     if (numAct == idx) {
       return "bg-violet-700 text-white w-10 h-10";
@@ -13,23 +15,21 @@ const Pagination: React.FC<{
   };
   return (
     <main className="h-10 flex items-center justify-center gap-14">
-      <FaArrowLeft />
+      <FaArrowLeft onClick={returnHendler} />
       <nav className="flex items-center justify-between w-96">
-          {Array.from({ length: dataLength }, (_, idx) => {
-          if (idx >= numAct - 1 && idx < numAct + 7) {
-            return (
-              <button
-                key={idx}
-                className={`mx-1 rounded-full ${styleBtn(idx)}`}
-              >
-                {idx + 1}
-              </button>
-            );
-          }
-          return null;
+        {Array.from({ length: dataLength }, (_, idx) => {
+          return (
+            <button
+              key={idx}
+              className={`mx-1 rounded-full ${styleBtn(idx)}`}
+              onClick={() => clickHendler(idx)}
+            >
+              {idx + 1}
+            </button>
+          );
         })}
       </nav>
-      <FaArrowRight />
+      <FaArrowRight onClick={nextHendler} />
     </main>
   );
 };
