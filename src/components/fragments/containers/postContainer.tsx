@@ -17,11 +17,11 @@ const PostContainer: React.FC<{
   clickHandler,
 }) => {
   return (
-    <main className="mx-16 my-16">
-      <h2 className=" text-4xl font-semibold">Blogs</h2>
-      <section className="grid grid-cols-3 grid-rows-3 gap-10 mt-10">
+    <main className="mx-5 sm:mx-16 my-6 sm:my-16">
+      <h2 className="text-xl sm:text-4xl text-center sm:text-left font-semibold">Blogs</h2>
+      <section className="grid sm:grid-cols-3 grid-cols-1 sm:grid-rows-3 gap-10 mt-10">
         {data.map((item, idx) => (
-          <PostBox key={idx} post={item.title} />
+          <PostBox key={idx} post={item.title} id={item.id} />
         ))}
       </section>
       <section className="mt-14">

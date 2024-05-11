@@ -14,9 +14,11 @@ export default async function handler(
         return res.status(200).json(data);
     }else{
         const { page, per_page } = req.query;
+        const token = req.headers.token;
         const { data } = await UserService.getUsersPage({
             page : page as string,
-            per_page: per_page as string
+            per_page: per_page as string,
+            token: token as string
         });
         return res.status(200).json(data);
     }

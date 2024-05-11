@@ -5,4 +5,5 @@ import Footer from "./headerAndFooter/footer";
 import UserTwoBox from "./boxs/userTwoBox";
 import SearchInput from "./inputs/searchInput";
 import UserInput from "./inputs/userInput";
-export {Pagination, ActionButton, Header, Footer, UserTwoBox, SearchInput, UserInput}
+import CommentBox from "./boxs/commentBox";
+export {Pagination, ActionButton, Header, Footer, UserTwoBox, SearchInput, UserInput, CommentBox}

@@ -21,7 +21,7 @@ export default function Home() {
     page: 1,
     per_page: 9,
   });
-const [dataUsers, setDataUsers] = useState<User[]>([])
+  const [dataUsers, setDataUsers] = useState<User[]>([]);
   const btnPageHendler = (idx: number) => {
     setPageAct((prev) => ({ ...prev, page: idx + 1 }));
   };
@@ -42,9 +42,13 @@ const [dataUsers, setDataUsers] = useState<User[]>([])
   useEffect(() => {
     const usersHendler = async () => {
       try {
-        const { data } = await axios.get("/api/users/get");
-      const result = data.filter((prev : User) => prev.status === "active")
-        setDataUsers(result)
+        const token = localStorage.getItem("token");
+        const headers = {
+          token: token,
+        };
+        const { data } = await axios.get("/api/users/get", { headers });
+        const result = data.filter((prev: User) => prev.status === "active");
+        setDataUsers(result);
       } catch (e) {
         console.log(e);
       }

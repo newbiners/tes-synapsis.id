@@ -1,4 +1,5 @@
 {
     "audioCues.lineHasBreakpoint": "off",
-    "audioCues.lineHasError": "off"
+    "audioCues.lineHasError": "off",
+    "liveshare.accessibility.soundsEnabled": false
 }

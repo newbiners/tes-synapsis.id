@@ -1,1 +1,1 @@
-export const baseApi = "https://gorest.co.in"
+export const baseApi = "https://gorest.co.in";

@@ -4,40 +4,17 @@ const UserContainer:React.FC<{
   data: User[]
 }> = ({data}) => {
   return (
-    <main className="mt-14 mx-20">
-      <h2 className="border-b-2 border-slate-500 w-64 text-4xl font-semibold">
+    <main className="mt-14 mx-5 sm:mx-20">
+      <h2 className="sm:border-b-2 border-slate-500 sm:w-64 text-xl text-center sm:text-start sm:text-4xl font-semibold">
         users active
       </h2>
       <section className="flex gap-5 overflow-x-auto py-11">
-        {data.map((item, idx) => (
+        {data.length !== 0 ? data.map((item, idx) => (
           <UserBox key={idx} email={item.email} name={item.name} />
-        ))}
+        )) : <p>hanya bisa di akses jika memiliki token</p>}
       </section>
     </main>
   );
 };
-
-const dataDummy = [
-  {
-    email: "dds_dharitri_mishra@bernhard.example",
-    name: "Dharitri Mishra DDS",
-  },
-  {
-    email: "dds_dharitri_mishra@bernhard.example",
-    name: "Dharitri Mishra DDS",
-  },
-  {
-    email: "dds_dharitri_mishra@bernhard.example",
-    name: "Dharitri Mishra DDS",
-  },
-  {
-    email: "dds_dharitri_mishra@bernhard.example",
-    name: "Dharitri Mishra DDS",
-  },
-  {
-    email: "dds_dharitri_mishra@bernhard.example",
-    name: "Dharitri Mishra DDS",
-  },
-];
 
 export default UserContainer;

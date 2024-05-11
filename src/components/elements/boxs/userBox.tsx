@@ -5,11 +5,11 @@ const UserBox:React.FC<{
     email: String
 }> = ({name, email, ...props}) => {
     return(
-        <main {...props} className="bg-sky-50 p-6 rounded-2xl flex items-center gap-4 shadow-xl">
+        <main {...props} className="bg-sky-50 p-6 rounded-2xl flex flex-col sm:flex-row items-center gap-4 shadow-xl">
             <IoPersonCircleOutline className="text-6xl"/>
             <div>
-                <h3 className="text-xl font-semibold">{name}</h3>
-                <p className="text-base">{email}</p>
+                <h3 className="text-base sm:text-xl sm:text-start text-center font-semibold">{name}</h3>
+                <p className="text-xs sm:text-base sm:text-left text-center">{email}</p>
             </div>
         </main>
     )
