@@ -14,7 +14,7 @@ data: BlogPost[]
     }, 4000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [data.length]);
 
   const btnNextHandler = () => {
     setIndex((prev) => (prev < data.length - 1 ? prev + 1 : 0));
