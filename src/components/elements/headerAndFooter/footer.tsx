@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import ActionButton from "../buttons/actionButton";
 import { GrInstagram } from "react-icons/gr";
-
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   const router = useRouter();
 
@@ -20,10 +20,11 @@ const Footer = () => {
       go: "/users",
     },
   ];
+
   return (
-    <footer className="h-96 p-9 bg-sky-50 flex items-end justify-between">
-      <section>
-        <nav className="flex flex-col gap-7 text-xl">
+    <footer className="h-72 sm:h-96 p-9 bg-sky-50 flex flex-col  items-center w-full  justify-end">
+      <section className="flex sm:flex-row flex-col w-full justify-between items-center sm:items-end">
+        <nav className="flex gap-7 flex-row sm:flex-col text-xl">
           {routeArr.map((item) => (
             <Link
               key={item.go}
@@ -38,15 +39,15 @@ const Footer = () => {
             </Link>
           ))}
         </nav>
-        <p className="text-base mt-10 font-semibold">gufronnewbiners@gmail.com</p>
-      </section>
-      <section >
-        <nav className="flex justify-between">
-            <GrInstagram className="text-4xl"/>
-            <GrInstagram className="text-4xl"/>
-            <GrInstagram className="text-4xl"/>
+        <nav className="flex  justify-between mt-8 sm:mt-0 gap-5">
+            <GrInstagram className="text-4xl" onClick={() => router.push("https://www.instagram.com/gufanto/")}/>
+            <FaGithub className="text-4xl" onClick={() => router.push("https://github.com/newbiners")}/>
+            <FaLinkedin className="text-4xl" onClick={() => router.push("https://www.linkedin.com/in/gufron-aprilianto-a046b1266/")}/>
         </nav>
-        <p className="text-2xl">Tes - Gufron Aprilianto</p>
+      </section>
+      <section className="flex  sm:flex-row flex-col w-full justify-between items-center sm:items-end mt-8">
+      <p className="text-xs sm:text-base font-semibold">gufronnewbiners@gmail.com</p>
+        <p className="text-sm sm:text-2xl">Tes - Gufron Aprilianto</p>
       </section>
     </footer>
   );

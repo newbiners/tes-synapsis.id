@@ -2,8 +2,6 @@ import React, { Dispatch, useState } from "react";
 import { IoMale, IoFemale } from "react-icons/io5";
 import { typeDataUser } from "@/types/User";
 import { ActionButton, UserInput } from "@/components/elements";
-import { useAtom } from "jotai";
-import { userEditeAtom } from "@/stores";
 
 const UserCreateContainer: React.FC<{
   btnHendle: () => void;
@@ -11,7 +9,6 @@ const UserCreateContainer: React.FC<{
   data: typeDataUser;
   btnHeandleCreate: () => void;
 }> = ({ btnHendle, setDataHendler, data, btnHeandleCreate }) => {
-  const [gender, setGender] = useState<"male" | "female">("male");
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDataHendler((prevState) => ({
@@ -38,20 +35,17 @@ const UserCreateContainer: React.FC<{
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
-    setGender(gender);
     setDataHendler((prevState) => ({
       ...prevState,
       gender: gender,
     }));
   };
-console.log(data, "data")
   return (
     <main className="h-screen w-full fixed top-0 flex items-center justify-center z-20">
       <div className="h-full w-full absolute bg-slate-600 opacity-25" />
-      <section className="absolute z-30 bg-white p-14 rounded-2xl flex flex-col">
-        <section className="flex gap-6 w-[40rem]">
+      <section className="absolute z-30 bg-white p-14 rounded-2xl flex flex-col mx-12">
+        <section className="flex xl:flex-row flex-col gap-6 md:w-[40rem]">
           <UserInput
-            className="w-96"
             label="Name"
             value={data.name}
             onChange={handleNameChange}
@@ -72,14 +66,14 @@ console.log(data, "data")
           </div>
           <div className="flex items-center gap-4">
             <ActionButton
-              variant={gender === "female" ? "violet" : "grey"}
+              variant={data.gender === "female" ? "violet" : "grey"}
               className="text-white flex justify-center"
               onClick={(e) => btnGenderHendler("female", e)}
             >
               <IoFemale />
             </ActionButton>
             <ActionButton
-              variant={gender === "male" ? "blue" : "grey"}
+              variant={data.gender === "male" ? "blue" : "grey"}
               className="text-white flex justify-center"
               onClick={(e) => btnGenderHendler("male", e)}
             >
@@ -88,7 +82,7 @@ console.log(data, "data")
           </div>
         </section>
         <section className="flex mt-12 w-full gap-7">
-          <ActionButton variant="grey" className="w-72" onClick={btnHendle}>
+          <ActionButton variant="grey" className="w-full md:w-72" onClick={btnHendle}>
             Cancel
           </ActionButton>
           <ActionButton

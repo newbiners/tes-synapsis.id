@@ -3,8 +3,11 @@ import MainLayout from "@/layouts/mainLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BlogPost } from "@/types/BlogPost";
+import { useAtom } from "jotai";
+import { loaderAtom } from "@/stores";
 const Blogs = () => {
   const [data, setData] = useState<BlogPost[]>([]);
+  const [_isLoader, setIsLoader] = useAtom<Boolean>(loaderAtom);
   const [pageAct, setPageAct] = useState<{ page: number; per_page: number }>({
     page: 1,
     per_page: 9,
@@ -30,12 +33,15 @@ const Blogs = () => {
   useEffect(() => {
     const blogHendler = async () => {
       try {
+        setIsLoader(true)
         const { data } = await axios.get(
           `/api/blog-post/get?page=${pageAct.page}&per_page=${pageAct.per_page}`
         );
         setData(data);
       } catch (error) {
         console.log(error);
+      }finally{
+        setIsLoader(false)
       }
     };
     blogHendler();

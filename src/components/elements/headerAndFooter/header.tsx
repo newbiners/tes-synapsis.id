@@ -25,7 +25,7 @@ const [open,setOpen] = useState(false)
       <div className="flex items-center w-40">
         <p className="font-bold ">test - gufron</p>
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-end xl:justify-center">
         <nav className="hidden sm:flex items-center gap-8 text-xl w-1/2 justify-between font-semibold">
           {routeArr.map((item) => (
             <Link
@@ -45,7 +45,7 @@ const [open,setOpen] = useState(false)
         <main className="flex sm:hidden justify-end w-full">
           <button className="text-3xl" onClick={() => setOpen(true)}>☰</button>
           {   open &&
-            <nav className="flex flex-col bg-white p-4 gap-3 font-semibold shadow-2xl text-center absolute w-full left-0 top-0">
+            <nav className="flex flex-col z-50 bg-white p-4 gap-3 font-semibold shadow-2xl text-center absolute w-full left-0 top-0">
             <button className="text-3xl absolute top-4 right-4" onClick={() => setOpen(false)}>
               <IoMdClose />
             </button>

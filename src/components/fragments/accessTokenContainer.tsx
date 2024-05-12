@@ -46,7 +46,7 @@ const AccessTokenContainer = () => {
       {act && (
         <main
           id="accessToken"
-          className="bg-sky-50 p-10 z-30 transition-all absolute right-3 shadow-xl top-0 w-1/5"
+          className="bg-sky-50 p-10 z-20 sm:z-30 transition-all absolute right-4  shadow-xl top-20 w-64 sm:w-1/2 xl:w-1/5"
         >
           <form onSubmit={btnGenerateAccess} className="flex flex-col gap-1">
             <label htmlFor="accessTokenInput">Access Token:</label>

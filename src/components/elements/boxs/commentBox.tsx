@@ -12,16 +12,16 @@ const CommentBox: React.FC<{
   return (
     <section className="flex gap-4 items-start">
       <main>
-        <div className="flex items-center gap-2 text-xl">
-          <p>{name}</p>
-          <span>|</span>
-          <p>{email}</p>
+        <div className="flex sm:flex-row flex-col items-center gap-2 text-xl">
+          <p className="text-xs">{name}</p>
+          <span className="xl:block hidden">|</span>
+          <p className="text-xs">{email}</p>
         </div>
         <div className="bg-sky-50 rounded-xl p-4">
-          <p className="text-2xl">{body}</p>
+          <p className="text-lg xl:text-2xl">{body}</p>
         </div>
       </main>
-      <IoPersonCircleSharp className="text-5xl"/>
+      <IoPersonCircleSharp className="text-5xl sm:block hidden"/>
     </section>
   );
 };

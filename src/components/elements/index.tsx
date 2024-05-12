@@ -6,4 +6,5 @@ import UserTwoBox from "./boxs/userTwoBox";
 import SearchInput from "./inputs/searchInput";
 import UserInput from "./inputs/userInput";
 import CommentBox from "./boxs/commentBox";
-export {Pagination, ActionButton, Header, Footer, UserTwoBox, SearchInput, UserInput, CommentBox}
+import Loader from "./loader";
+export {Pagination, ActionButton, Header, Footer, UserTwoBox, SearchInput, UserInput, CommentBox, Loader}

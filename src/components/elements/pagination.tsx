@@ -8,9 +8,9 @@ const Pagination: React.FC<{
 }> = ({ numAct, dataLength, nextHendler, returnHendler, clickHendler }) => {
   const styleBtn = (idx: number) => {
     if (numAct == idx) {
-      return "bg-violet-700 text-white w-10 h-10";
+      return "bg-violet-700 text-white w-7 h-7 sm:w-10 sm:h-10";
     } else {
-      return "bg-gray-200 text-slate-500 w-7 h-7";
+      return "bg-gray-200 text-slate-500 w-5 h-5 sm:w-7 sm:h-7";
     }
   };
   return (
@@ -21,7 +21,7 @@ const Pagination: React.FC<{
           return (
             <button
               key={idx}
-              className={`mx-1 rounded-full ${styleBtn(idx)}`}
+              className={`mx-1 rounded-full text-xs sm:text-sm ${styleBtn(idx)}`}
               onClick={() => clickHendler(idx)}
             >
               {idx + 1}

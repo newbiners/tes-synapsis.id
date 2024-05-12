@@ -9,8 +9,11 @@ import MainLayout from "@/layouts/mainLayout";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { User, typeDataUser } from "@/types/User";
+import { useAtom } from "jotai";
+import { loaderAtom } from "@/stores";
 const Users = () => {
   const [search, setSearch] = useState<string>("");
+  const [_isLoader, setIsLoader] = useAtom<Boolean>(loaderAtom);
   const [act, setAct] = useState<boolean>(false);
   const [dataUsers, setDataUsers] = useState<User[]>([]);
   const [dataUser, setDataUser] = useState<typeDataUser>({
@@ -28,17 +31,23 @@ const Users = () => {
 
   const fetchData = async () => {
     try {
+      setIsLoader(true)
       const token = localStorage.getItem("token")
       const headers = {
         token: token
       }
-      const { data } = await axios.get(
-        `/api/users/get?page=${pageAct.page}&per_page=${pageAct.per_page}`,
-        {headers}
-      );
-      setDataUsers(data);
+      if(!token) {
+        return null
+      }
+        const { data } = await axios.get(
+          `/api/users/get?page=${pageAct.page}&per_page=${pageAct.per_page}`,
+          {headers}
+          );
+          setDataUsers(data);
     } catch (error) {
       console.log(error);
+    }finally{
+      setIsLoader(false)
     }
   };
 
@@ -51,7 +60,7 @@ const Users = () => {
     if(act == true){
       setDataUser({
           email: "",
-          gender: "female",
+          gender: "",
           name: "",
           status: "inactive",
         });
@@ -88,6 +97,7 @@ const Users = () => {
 
   const btnCreateUserHendler = async () => {
     const token = localStorage.getItem("token")
+    setAct(!act);
     try {
       if (!dataUser.id) {
         const response = await axios.post("/api/users/create", {
@@ -123,9 +133,9 @@ const Users = () => {
   return (
     <main className="overflow-hidden">
       <MainLayout>
-        <section className="mx-16 mt-28">
-          <h2 className="text-4xl font-semibold">Users</h2>
-          <div className="flex items-center justify-between mt-7">
+        <section className="mx-4 xl:mx-16 mt-28">
+          <h2 className="text-xl sm:text-2xl xl:text-4xl text-center sm:text-left font-semibold">Users</h2>
+          <div className="flex xl:flex-row flex-col items-center justify-between mt-7">
             <SearchInput
               onChange={setSearch}
               value={search}
@@ -133,7 +143,7 @@ const Users = () => {
             />
             <ActionButton
               variant="violet"
-              className="text-xl text-white w-52 font-semibold"
+              className="text-sm xl:text-xl text-white w-28 xl:w-52 font-semibold xl:mt-0 mt-3"
               onClick={handleBtnAct}
             >
               Create User
@@ -142,7 +152,7 @@ const Users = () => {
         
             {dataUsers.length !== 0 ? 
               <>
-              <div className="grid grid-rows-3 grid-cols-3 gap-10 mt-10">
+              <div className="grid xl:grid-rows-3 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mt-10">
               {(userFilter.length === 0 ? dataUsers : userFilter).map(
                 (item, idx) => (
                   <UserTwoBox
@@ -166,7 +176,7 @@ const Users = () => {
             </div>
                 </>
                 :
-                <p className="text-4xl text-center mt-56">Halaman hanya bisa di akses jika memiliki token</p>
+                <p className="text-2xl sm:text-4xl text-center mt-56">Halaman hanya bisa di akses jika memiliki token</p>
             }
           
             
