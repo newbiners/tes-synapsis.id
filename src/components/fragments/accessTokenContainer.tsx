@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-
+import {useRouter} from "next/router";
+import Link from "next/link";
 const AccessTokenContainer = () => {
+  const router = useRouter();
   const [token, setToken] = useState<string>("");
   const [act, setAct] = useState<Boolean>(true);
   const btnGenerateAccess = () => {
@@ -67,6 +69,7 @@ const AccessTokenContainer = () => {
           <p className="mt-3">
             Note: Access token for read, create, update, delete user.
           </p>
+          <Link className="mt-2 text-red-400" href={"https://gorest.co.in/consumer/login"} target="_blank">Click here to get token</Link>
         </main>
       )}
     </>
