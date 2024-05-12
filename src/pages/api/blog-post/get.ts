@@ -9,7 +9,6 @@ export default async function handler(
       return res.status(405).json({ message: "Method Not Allowed" });
     }
     const { page, per_page } = req.query;
-    console.log(page, per_page)
     const { data } = await BlogsPostService.getBlogsPost({
       page : page as string,
       per_page: per_page as string

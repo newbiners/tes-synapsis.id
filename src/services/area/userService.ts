@@ -16,9 +16,7 @@ type payload = {
 export const UserService = {
   getUsersById: async (user_id: number) => {
     try {
-      console.log(user_id, "user_id");
       const response = await axios.get(`${api.usersApi()}/${user_id}`);
-      console.log(response, "ressss");
       return response;
     } catch (e) {
       console.log((e as AxiosError).request);
@@ -42,7 +40,6 @@ export const UserService = {
         Authorization: `Bearer ${payload.token}`,
       };
       const { page, per_page } = payload;
-      console.log("text");
       const response = await axios.get(
         `${api.usersApi()}?page=${page}&per_page=${per_page}`,{headers}
       );

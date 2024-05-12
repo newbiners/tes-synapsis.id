@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <main className={`${poppins.className} overflow-hidden`}>
       <MainLayout>
-        <CaroselBlog data={data} />
+        <CaroselBlog data={data.slice(0,4)} />
         <UserContainer data={dataUsers} />
         <PostContainer
           clickHandler={btnPageHendler}

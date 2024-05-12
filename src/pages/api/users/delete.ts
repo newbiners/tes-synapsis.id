@@ -4,7 +4,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-// console.log(localStorage.getItem("token"))
   try {
     if (req.method !== "DELETE") {
       return res.status(405).json({ message: "Method Not Allowed" });

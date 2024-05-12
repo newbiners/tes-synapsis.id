@@ -11,7 +11,7 @@ data: BlogPost[]
   useEffect(() => {
     const intervalId = setInterval(() => {
       setIndex((prev) => (prev < data.length - 1 ? prev + 1 : 0));
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(intervalId);
   }, []);
